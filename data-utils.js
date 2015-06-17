@@ -1,11 +1,13 @@
 /**
  * Data Utilities Module
+ * @module data-util
  */
 
 
 /**
  * Gives the minimum of an array.
  * @param {array} arr - the array to find the min of.
+ * @returns {numeric} Returns the minimum of the array.
  */
 function arrayMin(arr) {
   return arr.reduce(function(previous, current) {
@@ -16,6 +18,7 @@ function arrayMin(arr) {
 /**
  * Gives the maximum of an array
  * @param {array} arr - the array to find the max of.
+ * @returns {numeric} Returns the maximum of the array.
  */
 function arrayMax(arr) {
   return arr.reduce(function(previous, current) {
@@ -29,6 +32,11 @@ function arrayMax(arr) {
  * @param {array} array - the array to search in.
  * @param {string} property - the name of the property to look at.
  * @param {*} query - value to match (matches with ===).
+ * @returns {Object} Returns the first object matching the query.
+ * @example
+ * var x = [{'x': 1}, {'x': 2}, {'x': 3}];
+ * require('data-util').find(x, 'x', 2);
+ * // returns {'x': 2}
  */
 exports.find = function(array, property, query) {
   for (var i = 0; i < array.length; i++)
@@ -38,9 +46,16 @@ exports.find = function(array, property, query) {
 }
 
 /**
- * Returns an array of values of the given property from the dataset.
- * @param {array} data - the array of objects from which to get data.
+ * Extract a property from data set into an array.
+ * @param {array} data - the array of objects.
  * @param {string} variable - the property name to pick out of the data.
+ * @returns {array} Returns array of values from given property.
+ * @example
+ * var data = [{'year': 2012, 'users': 200},
+ *             {'year': 2013, 'users': 321},
+ *             {'year': 2014, 'users': 453}];
+ * require('data-util').select(data, 'users');
+ * // returns [200, 321, 453]
  */
 exports.select = function(data, variable) {
   var output = [];
@@ -53,6 +68,7 @@ exports.select = function(data, variable) {
  * Creates a copy of a dataset. Only goes one level deep; copies the properties
  * of elements in the data array.
  * @param {array} data - an array of objects to copy.
+ * @ returns {array} A copy of the data set.
  */
 exports.copy = function(data) {
   var keys = Object.keys(data[0]);
@@ -79,6 +95,19 @@ exports.copy = function(data) {
  * start. If this number is larger than the max value of existing values, it will
  * be used instead as the upper bound.
  * @param {number} end - (optional) a number giving where the range should end.
+ * @returns {array} Returns the new data set with filled in observations.
+ * @example
+ * var data = [{'year': 2010, 'likes': 12},
+ *             {'year': 2011, 'likes': 26},
+ *             {'year': 2014, 'likes': 8}];
+ * var defaults = ['likes': 0];
+ * require('data-utils').fill(data, 'year', defaults, 2015);
+ * // returns [{'year': 2010, 'likes': 12},
+ * //          {'year': 2011, 'likes': 26},
+ * //          {'year': 2012, 'likes': 0},
+ * //          {'year': 2013, 'likes': 0},
+ * //          {'year': 2014, 'likes': 8},
+ * //          {'year': 2015, 'likes': 0}];
  */
 exports.fill = function(data, input, defaults, start, end) {  
   data = this.copy(data); // make a copy
@@ -123,6 +152,15 @@ exports.fill = function(data, input, defaults, start, end) {
  * counts in.
  * @param {numeric} baseline - (optional) the intial value of the cumulative
  * value before any growth.
+ * @returns {array} Returns a new data set with the new variable added
+ * @example
+ * var x = [{'count': 1},
+ *          {'count': 2},
+ *          {'count': 3}];
+ * require('data-utils').cumulative(x, 'count', 'cumCount', 20);
+ * // returns: [{'count': 1, 'cumCount': 21},
+ * //           {'count': 2, 'cumCount': 23},
+ * //           {'count': 3, 'cumCount': 26}]
  */
 exports.cumulative = function(data, input, output, baseline) {
   data = this.copy(data); // make a copy
@@ -142,6 +180,14 @@ exports.cumulative = function(data, input, output, baseline) {
  * @param {string} output - the name of the property to save the percentages in.
  * @param {boolean} trim - where to trim off the first observation (otherwise it
  * will just be saved as zero.)
+ * @returns Returns a new data set with the new percent growth variable added.
+ * @example
+ * var x = [{'count': 10},
+ *          {'count': 15},
+ *          {'count': 30}];
+ * require('data-utils').percentageGrowth(x, 'count', 'growth');
+ * // returns [{'count': 15, 'growth': 50},
+ * //         {'count': 30, 'growth': 100}];
  */
 exports.percentGrowth = function(data, input, output, trim) {
   if (trim === undefined) trim = true;

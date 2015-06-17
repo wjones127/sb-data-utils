@@ -1,0 +1,27 @@
+{
+  "name": "sb-data-utils",
+  "version": "1.0.0",
+  "description": "A few convenient data manipulation functions.",
+  "main": "data-utils.js",
+  "dependencies": {
+    "chai": "^3.0.0",
+    "moment": "^2.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjones127/sb-data-utils.git"
+  },
+  "keywords": [
+    "data"
+  ],
+  "author": "Will Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wjones127/sb-data-utils/issues"
+  },
+  "homepage": "https://github.com/wjones127/sb-data-utils#readme"
+}

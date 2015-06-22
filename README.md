@@ -10,40 +10,40 @@ While in you project's directory, install the node package with
 
 Then, to use the script in a node module, require it with,
 ```javascript
-var du = require('sb-data-utils');
+var DU = require('sb-data-utils');
 ```
 
 To use the script in a browser app, first load the script with,
 ```html
 <script src="node_modules/sb-data-utils/dist/data-utils.min.js"></script>
 ```
-and then you can use the require command.
+and then the libraries methods will be available through the `DU` variable.
 
 ### Methods
 Here are some brief descriptions of the methods. For in-depth documentation of
 the methods provided in the module, checkout the JSDoc output at `out/index.html`. 
 
-__`du.find(array, property, query)`__: Returns the first element in the
+__`DU.find(array, property, query)`__: Returns the first element in the
 `array` whose property `property` matches `query`.
 
-__`du.select(array, variable)`__: Returns a simple array based giving the
+__`DU.select(array, variable)`__: Returns a simple array based giving the
 values of the property `variable` in the data set `array`.
 
-__`du.copy(data)`__: Creates a copy of a data set. This create a new array
+__`DU.copy(data)`__: Creates a copy of a data set. This create a new array
 with new elements, but the property values of each element are not duplicated.
 
-__`du.fill(data, input, defaults, start, end)`__: Fills in missing
+__`DU.fill(data, input, defaults, start, end)`__: Fills in missing
 observations in the data set `data`, based on missing integer values in the
 property `input` in the range `[start, end]`. `defaults` gives values for other
 properties in the missing observations. This function is useful for filling in
 data sets where data for particular years are missing.
 
-__`du.cumulative(data, input, output, baseline)`__: Adds a new variable to
+__`DU.cumulative(data, input, output, baseline)`__: Adds a new variable to
 a data set `data` called `output` which describes the cumulative count of a
 variable called `input`, where `baseline` is the value before any growth
 occurred.
 
-__`du.percentGrowth(data, input, output, trim)`__: Adds a new variable to a
+__`DU.percentGrowth(data, input, output, trim)`__: Adds a new variable to a
 data set `data` called `output` which describes the percentage growth based on a
 variable called `input`. By default will trim off the first observation.
 
